@@ -10,12 +10,11 @@ app.use(express.json());
 // Get all Restaurants
 app.get('/api/v1/restaurants', async (req, res) => {
   const {rows: restaurants} = await db.query('SELECT * FROM restaurants');
-  console.log(restaurants);
 
   res.status(200).json({
     status: 'success',
     data: {
-      restaurants: ['la petaca', 'el pomodoro']
+      restaurants
     }
   })
 })
