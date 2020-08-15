@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const db = require('./db/index');
 const app = express();
 
 // Este middleware permite obtener el body de "req" en forma de objeto.
@@ -7,7 +8,10 @@ const app = express();
 app.use(express.json());
 
 // Get all Restaurants
-app.get('/api/v1/restaurants', (req, res) => {
+app.get('/api/v1/restaurants', async (req, res) => {
+  const {rows: restaurants} = await db.query('SELECT * FROM restaurants');
+  console.log(restaurants);
+
   res.status(200).json({
     status: 'success',
     data: {
